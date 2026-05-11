@@ -1,14 +1,26 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\EquipmentApiController;
+use App\Http\Controllers\Api\BookingApiController;
+use App\Http\Controllers\Api\CheckinApiController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/equipment', [\App\Http\Controllers\Api\EquipmentController::class, 'index']);
-    Route::post('/equipment/{equipment}/checkout', [\App\Http\Controllers\Api\EquipmentController::class, 'checkout']);
-    Route::post('/equipment/{equipment}/checkin', [\App\Http\Controllers\Api\EquipmentController::class, 'checkin']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    
+    // Equipments
+    Route::get('/equipments', [EquipmentApiController::class, 'index']);
+    Route::post('/equipments', [EquipmentApiController::class, 'store']);
+    Route::put('/equipments/{id}', [EquipmentApiController::class, 'update']);
+    Route::delete('/equipments/{id}', [EquipmentApiController::class, 'destroy']);
+
+    // Bookings
+    Route::get('/bookings', [BookingApiController::class, 'index']);
+    Route::post('/bookings', [BookingApiController::class, 'store']);
+
+    // Checkin
+    Route::post('/checkin', [CheckinApiController::class, 'store']);
 });

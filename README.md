@@ -1,78 +1,100 @@
-# SmartHub Management System
+# Smart-Hub Management System
 
-## ERD (Entity Relationship Diagram)
+## Instalasi
 
-```mermaid
-erDiagram
-    USERS ||--o{ BOOKINGS : makes
-    EQUIPMENT ||--o{ BOOKINGS : included_in
+1. Clone repositori ini
+2. Salin `.env.example` ke `.env` dan konfigurasikan database MySQL
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=smarthub
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+3. Jalankan `composer install`
+4. Jalankan `npm install && npm run build`
+5. Generate application key: `php artisan key:generate`
+6. Jalankan migrasi dan seeder:
+   `php artisan migrate:fresh --seed`
+7. Jalankan server: `php artisan serve`
 
-    USERS {
-        int id PK
-        string name
-        string email
-        string password
-        string role
-        timestamp created_at
-        timestamp updated_at
-    }
-    
-    EQUIPMENT {
-        int id PK
-        string name
-        string description
-        enum status
-        timestamp created_at
-        timestamp updated_at
-    }
-    
-    BOOKINGS {
-        int id PK
-        int user_id FK
-        int equipment_id FK
-        datetime checkout_time
-        datetime return_time
-        enum status
-        timestamp created_at
-        timestamp updated_at
-    }
+## Akun Login Admin
+
+**Email:** admin@gmail.com
+**Password:** password
+
+## Struktur Folder Project Penting
+- `app/Http/Controllers/Api/` - API Controllers untuk aplikasi tablet
+- `app/Http/Controllers/` - Web Controllers untuk Dashboard Admin
+- `app/Http/Requests/` - Form Request Validation
+- `app/Models/` - Eloquent Models dengan Relasinya
+- `database/migrations/` - Struktur Tabel Database
+- `database/seeders/` - Seeder Data Awal
+- `routes/api.php` - Protected & Public API Endpoints
+- `routes/web.php` - Web Dashboard Routes
+- `resources/views/admin/` - Blade + Bootstrap Admin Views
+
+## Git Workflow Strategy
+
+Proyek ini menggunakan branching strategy berikut:
+- `main` - Production
+- `development` - Staging/Testing
+- `feature/*` - Fitur baru
+
+Contoh Workflow Git yang digunakan:
+```bash
+# Membuat dan beralih ke branch fitur baru
+git checkout -b feature/email-notification
+
+# Menambahkan perubahan ke stage
+git add .
+
+# Menyimpan perubahan dengan pesan commit
+git commit -m "add email notification feature"
+
+# Mengirim perubahan ke repository remote (origin)
+git push origin feature/email-notification
+
+# (Opsional) Menggabungkan kembali ke development
+git checkout development
+git merge feature/email-notification
 ```
 
 ## API Documentation
 
-### Endpoints (Requires Bearer Token)
+**Semua endpoint API dibawah ini (kecuali Login) wajib menyertakan Header:**
+`Authorization: Bearer {token}`
+`Accept: application/json`
 
-**1. GET `/api/equipment`**
-*   Returns a list of all equipment.
-
-**2. POST `/api/equipment/{id}/checkout`**
-*   Checks out an equipment for the authenticated user.
-*   Returns:
+### 1. Login (POST `/api/login`)
+Body:
 ```json
 {
-    "message": "Equipment checked out successfully",
-    "booking": { ... },
-    "equipment": { ... }
+    "email": "admin@gmail.com",
+    "password": "password"
 }
 ```
 
-**3. POST `/api/equipment/{id}/checkin`**
-*   Returns equipment back.
-*   Returns:
+### 2. Equipments
+- **GET `/api/equipments`** - Ambil semua equipment
+- **POST `/api/equipments`** - Tambah equipment baru
+- **PUT `/api/equipments/{id}`** - Update equipment
+- **DELETE `/api/equipments/{id}`** - Hapus equipment
+
+### 3. Bookings
+- **GET `/api/bookings`** - Lihat semua booking
+- **POST `/api/bookings`** - Buat booking baru
+
+### 4. Checkin (POST `/api/checkin`)
+Body:
 ```json
 {
-    "message": "Equipment checked in successfully",
-    "equipment": { ... }
+  "equipment_id": 1,
+  "status": "checked_in"
 }
 ```
 
-## Setup Instructions
-1. Run `composer install`
-2. Configure `.env` database to point to MySQL database `smarthub`.
-3. Run `php artisan migrate`
-4. Run `npm install && npm run build`
-5. Run `php artisan serve`
-
-## Testing
-To run tests:
-`php artisan test`
+### 5. Logout (POST `/api/logout`)
+*(Memerlukan Token Sanctum)*
+Mengakhiri sesi token.

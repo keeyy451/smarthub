@@ -9,10 +9,21 @@ class Equipment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'status'];
+    protected $table = 'equipments';
 
-    public function bookings()
+    protected $fillable = [
+        'nama_peralatan',
+        'kategori',
+        'kondisi',
+        'status',
+        'jumlah',
+    ];
+
+    /**
+     * Equipment has many checkins
+     */
+    public function equipmentCheckins()
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasMany(EquipmentCheckin::class);
     }
 }
