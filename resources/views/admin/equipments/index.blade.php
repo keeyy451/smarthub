@@ -1,74 +1,109 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Equipment Management') }}
-        </h2>
-    </x-slot>
+@extends('layouts.admin')
+@section('title', 'Equipment Management')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                
-                @if(session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
+@section('content')
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+    <div>
+        <h5 class="mb-1 fw-bold">Daftar Peralatan</h5>
+        <p class="text-muted mb-0" style="font-size:.85rem">Kelola inventaris peralatan studio</p>
+    </div>
+    <a href="{{ route('admin.equipments.create') }}" class="btn btn-primary">
+        <i class="bi bi-plus-lg me-1"></i> Tambah Equipment
+    </a>
+</div>
 
-                <div class="d-flex justify-content-between mb-3">
-                    <form action="{{ route('admin.equipments.index') }}" method="GET" class="d-flex gap-2">
-                        <input type="text" name="search" class="form-control" placeholder="Cari peralatan..." value="{{ request('search') }}">
-                        <select name="status" class="form-select">
-                            <option value="">Semua Status</option>
-                            <option value="tersedia" {{ request('status') == 'tersedia' ? 'selected' : '' }}>Tersedia</option>
-                            <option value="dipinjam" {{ request('status') == 'dipinjam' ? 'selected' : '' }}>Dipinjam</option>
-                            <option value="maintenance" {{ request('status') == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </form>
-                    <a href="{{ route('admin.equipments.create') }}" class="btn btn-success">Tambah Equipment</a>
+{{-- Filter & Search --}}
+<div class="card content-card mb-4">
+    <div class="card-body py-3">
+        <form action="{{ route('admin.equipments.index') }}" method="GET" class="row g-2 align-items-end">
+            <div class="col-sm-5">
+                <label class="form-label mb-1" style="font-size:.8rem; color:#64748b;">Cari Peralatan</label>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                    <input type="text" name="search" class="form-control" placeholder="Nama peralatan..." value="{{ request('search') }}">
                 </div>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Kategori</th>
-                                <th>Kondisi</th>
-                                <th>Status</th>
-                                <th>Jumlah</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($equipments as $eq)
-                            <tr>
-                                <td>{{ $loop->iteration + $equipments->firstItem() - 1 }}</td>
-                                <td>{{ $eq->nama_peralatan }}</td>
-                                <td>{{ $eq->kategori }}</td>
-                                <td>{{ $eq->kondisi }}</td>
-                                <td>
-                                    <span class="badge bg-{{ $eq->status == 'tersedia' ? 'success' : ($eq->status == 'dipinjam' ? 'warning' : 'danger') }}">
-                                        {{ $eq->status }}
-                                    </span>
-                                </td>
-                                <td>{{ $eq->jumlah }}</td>
-                                <td>
-                                    <a href="{{ route('admin.equipments.edit', $eq->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="{{ route('admin.equipments.destroy', $eq->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                
-                {{ $equipments->links() }}
             </div>
+            <div class="col-sm-3">
+                <label class="form-label mb-1" style="font-size:.8rem; color:#64748b;">Status</label>
+                <select name="status" class="form-select form-select-sm">
+                    <option value="">Semua Status</option>
+                    <option value="tersedia" {{ request('status') == 'tersedia' ? 'selected' : '' }}>Tersedia</option>
+                    <option value="dipinjam" {{ request('status') == 'dipinjam' ? 'selected' : '' }}>Dipinjam</option>
+                    <option value="maintenance" {{ request('status') == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-sm btn-primary w-100">
+                    <i class="bi bi-funnel me-1"></i> Filter
+                </button>
+            </div>
+            @if(request('search') || request('status'))
+            <div class="col-sm-2">
+                <a href="{{ route('admin.equipments.index') }}" class="btn btn-sm btn-outline-secondary w-100">Reset</a>
+            </div>
+            @endif
+        </form>
+    </div>
+</div>
+
+{{-- Table --}}
+<div class="card content-card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th style="width:50px">#</th>
+                        <th>Nama Peralatan</th>
+                        <th>Kategori</th>
+                        <th>Kondisi</th>
+                        <th>Status</th>
+                        <th style="width:80px">Jumlah</th>
+                        <th style="width:140px">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($equipments as $eq)
+                    <tr>
+                        <td>{{ $loop->iteration + $equipments->firstItem() - 1 }}</td>
+                        <td class="fw-medium">{{ $eq->nama_peralatan }}</td>
+                        <td><span class="text-muted">{{ $eq->kategori }}</span></td>
+                        <td><span class="badge badge-status badge-{{ $eq->kondisi }}">{{ str_replace('_', ' ', $eq->kondisi) }}</span></td>
+                        <td><span class="badge badge-status badge-{{ $eq->status }}">{{ $eq->status }}</span></td>
+                        <td class="text-center">{{ $eq->jumlah }}</td>
+                        <td>
+                            <div class="d-flex gap-1">
+                                <a href="{{ route('admin.equipments.edit', $eq->id) }}" class="btn btn-sm btn-outline-warning btn-action" title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <form action="{{ route('admin.equipments.destroy', $eq->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus peralatan ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger btn-action" title="Hapus">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="7" class="text-center py-5">
+                            <div class="text-muted">
+                                <i class="bi bi-inbox" style="font-size:2rem"></i>
+                                <p class="mt-2 mb-0">Belum ada data peralatan</p>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
-</x-app-layout>
+    @if($equipments->hasPages())
+    <div class="card-footer bg-transparent border-0 d-flex justify-content-center py-3">
+        {{ $equipments->withQueryString()->links() }}
+    </div>
+    @endif
+</div>
+@endsection
