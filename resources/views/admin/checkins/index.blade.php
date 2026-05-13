@@ -2,17 +2,9 @@
 @section('title', 'Riwayat Check-in')
 
 @section('content')
-<<<<<<< HEAD
-<div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-    <div>
-        <h5 class="mb-1 fw-bold">Riwayat Check-in Peralatan</h5>
-        <p class="text-muted mb-0" style="font-size:.85rem">Log aktivitas check-in/check-out peralatan oleh anggota</p>
-    </div>
-=======
 <div class="page-header">
     <h4>Riwayat Check-in Peralatan</h4>
     <p>Log aktivitas check-in & check-out peralatan oleh anggota melalui API tablet</p>
->>>>>>> development
 </div>
 
 <div class="card content-card">
@@ -21,31 +13,16 @@
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
-<<<<<<< HEAD
-                        <th style="width:50px">#</th>
-                        <th>User</th>
-                        <th>Equipment</th>
-                        <th>Waktu</th>
-                        <th>Status</th>
-=======
                         <th style="width:50px" class="ps-4">#</th>
                         <th>Member</th>
                         <th>Peralatan</th>
                         <th>Waktu</th>
                         <th class="pe-4 text-end">Status</th>
->>>>>>> development
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($checkins as $ci)
                     <tr>
-<<<<<<< HEAD
-                        <td>{{ $loop->iteration + $checkins->firstItem() - 1 }}</td>
-                        <td class="fw-medium">{{ optional($ci->user)->name ?? '-' }}</td>
-                        <td>{{ optional($ci->equipment)->nama_peralatan ?? '-' }}</td>
-                        <td>{{ $ci->waktu_checkin ? $ci->waktu_checkin->format('d M Y - H:i') : '-' }}</td>
-                        <td><span class="badge badge-status badge-{{ $ci->status }}">{{ str_replace('_', ' ', $ci->status) }}</span></td>
-=======
                         <td class="ps-4">{{ $loop->iteration + $checkins->firstItem() - 1 }}</td>
                         <td>
                             <div class="d-flex align-items-center gap-2">
@@ -68,20 +45,14 @@
                                 {{ $ci->status == 'checked_out' ? '↗ Dipinjam' : '↙ Dikembalikan' }}
                             </span>
                         </td>
->>>>>>> development
                     </tr>
                     @empty
                     <tr>
                         <td colspan="5" class="text-center py-5">
                             <div class="text-muted">
-<<<<<<< HEAD
-                                <i class="bi bi-box-arrow-in-right" style="font-size:2rem"></i>
-                                <p class="mt-2 mb-0">Belum ada riwayat check-in</p>
-=======
                                 <i class="bi bi-box-arrow-in-right" style="font-size:2.5rem; opacity: .3;"></i>
                                 <p class="mt-3 mb-0 fw-semibold">Belum ada riwayat check-in</p>
                                 <p class="small text-muted mt-1">Data akan muncul saat member meminjam alat via aplikasi tablet</p>
->>>>>>> development
                             </div>
                         </td>
                     </tr>

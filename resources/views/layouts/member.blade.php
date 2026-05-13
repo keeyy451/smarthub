@@ -34,12 +34,7 @@
         }
 
         * { font-family: 'Outfit', sans-serif; -webkit-font-smoothing: antialiased; }
-
         body { background: var(--body-bg); min-height: 100vh; color: var(--text-primary); }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
         /* ===== SIDEBAR ===== */
         .sidebar {
@@ -145,26 +140,6 @@
         .btn { font-weight: 600; font-size: .875rem; border-radius: var(--radius-md); transition: var(--transition); }
         .btn-primary { background: var(--primary); border-color: var(--primary); box-shadow: 0 2px 4px rgba(14, 165, 233, 0.25); }
         .btn-primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); transform: translateY(-1px); }
-
-        /* ===== FORMS ===== */
-        .form-control, .form-select { border-radius: var(--radius-md); border-color: var(--border-color); padding: .625rem 1rem; font-size: .875rem; }
-        .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(14, 165, 233, .12); }
-
-        /* ===== EQUIPMENT CARDS ===== */
-        .equipment-card {
-            border: 1px solid var(--border-color); border-radius: var(--radius-xl);
-            box-shadow: var(--card-shadow); transition: var(--transition); background: var(--card-bg);
-        }
-        .equipment-card:hover { transform: translateY(-5px); box-shadow: var(--card-shadow-hover); }
-        .equipment-card .card-icon { width: 56px; height: 56px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-
-        /* ===== PAGE HEADER ===== */
-        .page-header { margin-bottom: 2rem; }
-        .page-header h4 { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: .25rem; }
-        .page-header p { color: var(--text-muted); font-size: .9rem; margin-bottom: 0; }
-
-        .pagination .page-link { color: var(--primary); border-radius: var(--radius-sm); margin: 0 2px; font-size: .85rem; font-weight: 600; }
-        .pagination .page-item.active .page-link { background: var(--primary); border-color: var(--primary); }
 
         /* ===== RESPONSIVE ===== */
         .sidebar-toggle { display: none; }

@@ -1,100 +1,66 @@
-# Smart-Hub Management System
+# Smart-Hub Management System 🚀
 
-## Instalasi
+**Tugas UTS Pemrograman Fullstack - Universitas Dian Nusantara**
 
-1. Clone repositori ini
-2. Salin `.env.example` ke `.env` dan konfigurasikan database MySQL
+Smart-Hub Management System adalah platform terintegrasi untuk mengelola peminjaman ruang kerja dan inventaris peralatan studio secara mandiri. Sistem ini dirancang untuk melayani dua jenis pengguna: **Admin** (melalui Web Dashboard) dan **Member** (melalui integrasi REST API untuk aplikasi tablet).
+
+## ✨ Fitur Utama
+
+- **Premium UI/UX**: Menggunakan desain *Glassmorphism* dengan palet warna *Sky Blue* dan tipografi *Outfit*.
+- **Admin Dashboard**: Visualisasi statistik inventaris, booking, dan aktivitas member secara real-time.
+- **Manajemen Inventaris (CRUD)**: Pengelolaan lengkap peralatan studio (Kamera, Laptop, Audio, dll).
+- **Booking System**: Sistem pemesanan ruangan dengan validasi status otomatis.
+- **Secure REST API**: Autentikasi berbasis Token (Laravel Sanctum) untuk integrasi aplikasi pihak ketiga (Tablet Check-in).
+- **Real-time Check-in/out**: Pencatatan otomatis status peralatan melalui endpoint API.
+
+## 🛠️ Tech Stack
+
+- **Framework**: Laravel 11/13
+- **Database**: MySQL
+- **Frontend**: Blade Template, Bootstrap 5, Vanilla CSS (Premium Custom Styles)
+- **API Security**: Laravel Sanctum (Token based)
+- **Version Control**: Git (Branching Strategy)
+
+## 🚀 Cara Instalasi
+
+1. **Clone Repositori**:
+   ```bash
+   git clone [url-repo-anda]
+   cd smarthub
    ```
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=smarthub
-   DB_USERNAME=root
-   DB_PASSWORD=
+
+2. **Instal Dependencies**:
+   ```bash
+   composer install
+   npm install && npm run build
    ```
-3. Jalankan `composer install`
-4. Jalankan `npm install && npm run build`
-5. Generate application key: `php artisan key:generate`
-6. Jalankan migrasi dan seeder:
-   `php artisan migrate:fresh --seed`
-7. Jalankan server: `php artisan serve`
 
-## Akun Login Admin
+3. **Konfigurasi Environment**:
+   Salin file `.env.example` menjadi `.env` dan sesuaikan pengaturan database MySQL Anda.
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-**Email:** admin@gmail.com
-**Password:** password
+4. **Migrasi Database**:
+   ```bash
+   php artisan migrate
+   ```
 
-## Struktur Folder Project Penting
-- `app/Http/Controllers/Api/` - API Controllers untuk aplikasi tablet
-- `app/Http/Controllers/` - Web Controllers untuk Dashboard Admin
-- `app/Http/Requests/` - Form Request Validation
-- `app/Models/` - Eloquent Models dengan Relasinya
-- `database/migrations/` - Struktur Tabel Database
-- `database/seeders/` - Seeder Data Awal
-- `routes/api.php` - Protected & Public API Endpoints
-- `routes/web.php` - Web Dashboard Routes
-- `resources/views/admin/` - Blade + Bootstrap Admin Views
+5. **Jalankan Aplikasi**:
+   ```bash
+   php artisan serve
+   ```
 
-## Git Workflow Strategy
+## 📡 API Documentation
 
-Proyek ini menggunakan branching strategy berikut:
-- `main` - Production
-- `development` - Staging/Testing
-- `feature/*` - Fitur baru
+Sistem ini menyediakan endpoint API yang diproteksi token:
 
-Contoh Workflow Git yang digunakan:
-```bash
-# Membuat dan beralih ke branch fitur baru
-git checkout -b feature/email-notification
+- **POST** `/api/login`: Mendapatkan Token Autentikasi.
+- **GET** `/api/equipments`: Mengambil daftar inventaris peralatan.
+- **POST** `/api/checkin`: Mengirim status check-in/out peralatan secara real-time.
 
-# Menambahkan perubahan ke stage
-git add .
-
-# Menyimpan perubahan dengan pesan commit
-git commit -m "add email notification feature"
-
-# Mengirim perubahan ke repository remote (origin)
-git push origin feature/email-notification
-
-# (Opsional) Menggabungkan kembali ke development
-git checkout development
-git merge feature/email-notification
-```
-
-## API Documentation
-
-**Semua endpoint API dibawah ini (kecuali Login) wajib menyertakan Header:**
-`Authorization: Bearer {token}`
-`Accept: application/json`
-
-### 1. Login (POST `/api/login`)
-Body:
-```json
-{
-    "email": "admin@gmail.com",
-    "password": "password"
-}
-```
-
-### 2. Equipments
-- **GET `/api/equipments`** - Ambil semua equipment
-- **POST `/api/equipments`** - Tambah equipment baru
-- **PUT `/api/equipments/{id}`** - Update equipment
-- **DELETE `/api/equipments/{id}`** - Hapus equipment
-
-### 3. Bookings
-- **GET `/api/bookings`** - Lihat semua booking
-- **POST `/api/bookings`** - Buat booking baru
-
-### 4. Checkin (POST `/api/checkin`)
-Body:
-```json
-{
-  "equipment_id": 1,
-  "status": "checked_in"
-}
-```
-
-### 5. Logout (POST `/api/logout`)
-*(Memerlukan Token Sanctum)*
-Mengakhiri sesi token.
+---
+**Dibuat Oleh**: [Nama Anda]
+**NIM**: [NIM Anda]
+**Mata Kuliah**: Pemrograman Fullstack

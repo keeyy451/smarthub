@@ -11,6 +11,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->role === 'member') {
+            return redirect()->route('member.dashboard');
+        }
+
         $stats = [
             'total_equipment' => Equipment::count(),
             'tersedia' => Equipment::where('status', 'tersedia')->count(),
@@ -32,15 +36,11 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-<<<<<<< HEAD
-        return view('admin.dashboard', compact('stats', 'recent_checkins', 'recent_bookings'));
-=======
         $recent_users = User::where('role', 'member')
             ->latest()
             ->take(5)
             ->get();
 
         return view('admin.dashboard', compact('stats', 'recent_checkins', 'recent_bookings', 'recent_users'));
->>>>>>> development
     }
 }

@@ -13,8 +13,6 @@ class BookingWebController extends Controller
         return view('admin.bookings.index', compact('bookings'));
     }
 
-<<<<<<< HEAD
-=======
     public function create()
     {
         $users = \App\Models\User::all();
@@ -58,7 +56,6 @@ class BookingWebController extends Controller
         return redirect()->route('admin.bookings.index')->with('success', 'Booking updated successfully.');
     }
 
->>>>>>> development
     public function updateStatus(Request $request, RoomBooking $booking)
     {
         $request->validate(['status' => 'required|in:pending,approved,rejected,selesai']);
@@ -66,13 +63,10 @@ class BookingWebController extends Controller
         
         return redirect()->route('admin.bookings.index')->with('success', 'Booking status updated.');
     }
-<<<<<<< HEAD
-=======
 
     public function destroy(RoomBooking $booking)
     {
         $booking->delete();
         return redirect()->route('admin.bookings.index')->with('success', 'Booking deleted successfully.');
     }
->>>>>>> development
 }
