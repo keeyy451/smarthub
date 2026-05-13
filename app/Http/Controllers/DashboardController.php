@@ -32,6 +32,15 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+<<<<<<< HEAD
         return view('admin.dashboard', compact('stats', 'recent_checkins', 'recent_bookings'));
+=======
+        $recent_users = User::where('role', 'member')
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('admin.dashboard', compact('stats', 'recent_checkins', 'recent_bookings', 'recent_users'));
+>>>>>>> development
     }
 }
