@@ -1,10 +1,10 @@
-# Smart-Hub Management System 🚀
+# Smart-Hub Management System 
 
 **Tugas UTS Pemrograman Fullstack - Universitas Dian Nusantara**
 
 Smart-Hub Management System adalah platform terintegrasi untuk mengelola peminjaman ruang kerja dan inventaris peralatan studio secara mandiri. Sistem ini dirancang untuk melayani dua jenis pengguna: **Admin** (melalui Web Dashboard) dan **Member** (melalui integrasi REST API untuk aplikasi tablet).
 
-## ✨ Fitur Utama
+##  Fitur Utama
 
 - **Premium UI/UX**: Menggunakan desain *Glassmorphism* dengan palet warna *Sky Blue* dan tipografi *Outfit*.
 - **Admin Dashboard**: Visualisasi statistik inventaris, booking, dan aktivitas member secara real-time.
@@ -13,7 +13,7 @@ Smart-Hub Management System adalah platform terintegrasi untuk mengelola peminja
 - **Secure REST API**: Autentikasi berbasis Token (Laravel Sanctum) untuk integrasi aplikasi pihak ketiga (Tablet Check-in).
 - **Real-time Check-in/out**: Pencatatan otomatis status peralatan melalui endpoint API.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: Laravel 11/13
 - **Database**: MySQL
@@ -21,7 +21,7 @@ Smart-Hub Management System adalah platform terintegrasi untuk mengelola peminja
 - **API Security**: Laravel Sanctum (Token based)
 - **Version Control**: Git (Branching Strategy)
 
-## 🚀 Cara Instalasi
+##  Cara Instalasi
 
 1. **Clone Repositori**:
    ```bash
@@ -52,7 +52,7 @@ Smart-Hub Management System adalah platform terintegrasi untuk mengelola peminja
    php artisan serve
    ```
 
-## 📡 API Documentation
+##  API Documentation
 
 Sistem ini menyediakan endpoint API yang diproteksi token:
 
@@ -61,6 +61,6 @@ Sistem ini menyediakan endpoint API yang diproteksi token:
 - **POST** `/api/checkin`: Mengirim status check-in/out peralatan secara real-time.
 
 ---
-**Dibuat Oleh**: [Nama Anda]
-**NIM**: [NIM Anda]
+**Dibuat Oleh**: Ezra Firmansyah
+**NIM**: 411231135
 **Mata Kuliah**: Pemrograman Fullstack
