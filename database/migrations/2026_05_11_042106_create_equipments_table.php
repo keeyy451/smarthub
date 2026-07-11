@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama_peralatan');
             $table->string('kategori');
-            $table->enum('kondisi', ['baik', 'rusak_ringan', 'rusak_berat'])->default('baik');
-            $table->enum('status', ['tersedia', 'dipinjam', 'maintenance'])->default('tersedia');
+            $table->string('kondisi')->default('baik');
+            $table->string('status')->default('tersedia');
             $table->integer('jumlah')->default(1);
             $table->timestamps();
         });

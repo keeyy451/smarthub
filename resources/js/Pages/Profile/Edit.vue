@@ -1,7 +1,7 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3';
-import AuthenticatedLayout from '../../../Layouts/AuthenticatedLayout.vue';
-import InputField from '../../../Components/InputField.vue';
+import AuthenticatedLayout from '../../Layouts/AuthenticatedLayout.vue';
+import InputField from '../../Components/InputField.vue';
 
 const props = defineProps({
     user: Object,

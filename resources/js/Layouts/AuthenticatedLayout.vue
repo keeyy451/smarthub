@@ -168,15 +168,15 @@ const navItems = computed(() => isAdmin.value ? adminNav : memberNav);
             </main>
         </div>
     </div>
-
-    <style scoped>
-    .lg\:hidden {
-        display: flex;
-    }
-    @media (min-width: 1024px) {
-        .lg\:hidden {
-            display: none;
-        }
-    }
-    </style>
 </template>
+
+<style scoped>
+.lg\:hidden {
+    display: flex;
+}
+@media (min-width: 1024px) {
+    .lg\:hidden {
+        display: none;
+    }
+}
+</style>

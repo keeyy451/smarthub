@@ -41,6 +41,11 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        return view('admin.dashboard', compact('stats', 'recent_checkins', 'recent_bookings', 'recent_users'));
+        return \Inertia\Inertia::render('Admin/Dashboard', [
+            'stats' => $stats,
+            'recent_checkins' => $recent_checkins,
+            'recent_bookings' => $recent_bookings,
+            'recent_users' => $recent_users
+        ]);
     }
 }
