@@ -10,6 +10,8 @@ class CheckinWebController extends Controller
     public function index()
     {
         $checkins = EquipmentCheckin::with(['user', 'equipment'])->latest('waktu_checkin')->paginate(10);
-        return view('admin.checkins.index', compact('checkins'));
+        return \Inertia\Inertia::render('Admin/Checkins/Index', [
+            'checkins' => $checkins
+        ]);
     }
 }

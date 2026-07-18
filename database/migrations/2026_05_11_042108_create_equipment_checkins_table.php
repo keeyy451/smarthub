@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('equipment_id')->constrained('equipments')->onDelete('cascade');
             $table->datetime('waktu_checkin')->nullable();
-            $table->enum('status', ['checked_in', 'checked_out'])->default('checked_in');
+            $table->string('status')->default('checked_in');
             $table->timestamps();
         });
     }

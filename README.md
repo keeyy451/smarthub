@@ -1,66 +1,16 @@
-# Smart-Hub Management System 
+# 🏢 Smart-Hub Management System
 
-**Tugas UTS Pemrograman Fullstack - Universitas Dian Nusantara**
+## 📋 Penjelasan
+Smart-Hub Management System adalah platform terintegrasi berbasis web untuk mengelola peminjaman ruang kerja dan inventaris peralatan studio secara mandiri. Sistem ini dirancang untuk memudahkan manajemen aset dan pemesanan ruangan bagi Admin maupun Member melalui antarmuka yang modern dan responsif.
 
-Smart-Hub Management System adalah platform terintegrasi untuk mengelola peminjaman ruang kerja dan inventaris peralatan studio secara mandiri. Sistem ini dirancang untuk melayani dua jenis pengguna: **Admin** (melalui Web Dashboard) dan **Member** (melalui integrasi REST API untuk aplikasi tablet).
+## 🛠️ Stack / Teknis
+- **Bahasa Pemrograman / Framework**: PHP (Laravel 13), JavaScript (Vue 3 + Inertia.js), CSS (Vanilla CSS modern)
+- **Database**: PostgreSQL via Supabase (Cloud Database API)
+- **AI Recommendation**: Antigravity (Google DeepMind) untuk pendampingan code generation & arsitektur proyek
+- **Version Control**: Git (Arsitektur Multi-branch)
 
-##  Fitur Utama
-
-- **Premium UI/UX**: Menggunakan desain *Glassmorphism* dengan palet warna *Sky Blue* dan tipografi *Outfit*.
-- **Admin Dashboard**: Visualisasi statistik inventaris, booking, dan aktivitas member secara real-time.
-- **Manajemen Inventaris (CRUD)**: Pengelolaan lengkap peralatan studio (Kamera, Laptop, Audio, dll).
-- **Booking System**: Sistem pemesanan ruangan dengan validasi status otomatis.
-- **Secure REST API**: Autentikasi berbasis Token (Laravel Sanctum) untuk integrasi aplikasi pihak ketiga (Tablet Check-in).
-- **Real-time Check-in/out**: Pencatatan otomatis status peralatan melalui endpoint API.
-
-## Tech Stack
-
-- **Framework**: Laravel 11/13
-- **Database**: MySQL
-- **Frontend**: Blade Template, Bootstrap 5, Vanilla CSS (Premium Custom Styles)
-- **API Security**: Laravel Sanctum (Token based)
-- **Version Control**: Git (Branching Strategy)
-
-##  Cara Instalasi
-
-1. **Clone Repositori**:
-   ```bash
-   git clone [url-repo-anda]
-   cd smarthub
-   ```
-
-2. **Instal Dependencies**:
-   ```bash
-   composer install
-   npm install && npm run build
-   ```
-
-3. **Konfigurasi Environment**:
-   Salin file `.env.example` menjadi `.env` dan sesuaikan pengaturan database MySQL Anda.
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
-
-4. **Migrasi Database**:
-   ```bash
-   php artisan migrate
-   ```
-
-5. **Jalankan Aplikasi**:
-   ```bash
-   php artisan serve
-   ```
-
-##  API Documentation
-
-Sistem ini menyediakan endpoint API yang diproteksi token:
-
-- **POST** `/api/login`: Mendapatkan Token Autentikasi.
-- **GET** `/api/equipments`: Mengambil daftar inventaris peralatan.
-- **POST** `/api/checkin`: Mengirim status check-in/out peralatan secara real-time.
-
----
-**Dibuat Oleh**: Ezra Firmansyah
-**NIM**: 411231135
-**Mata Kuliah**: Pemrograman Fullstack
+## 🔄 Flow Aplikasi
+1. **Autentikasi & Otorisasi**: Pengguna melakukan login melalui halaman autentikasi terpusat, di mana sistem akan memvalidasi *role* dan mengarahkan pengguna ke dashboard Admin atau Member.
+2. **Manajemen Data Master (Admin)**: Admin mengelola data master peralatan (CRUD), memonitor statistik keseluruhan, serta meninjau riwayat transaksi peminjaman dan *check-in* secara terpusat.
+3. **Transaksi & Aktivitas (Member)**: Member menelusuri katalog peralatan, melakukan *check-out*/*check-in* alat secara mandiri, dan membuat reservasi (*booking*) ruangan sesuai ketersediaan.
+4. **Integrasi Sistem**: Seluruh interaksi antarmuka pengguna pada *web application* dikomunikasikan secara sinkron dan aman ke *backend services* melalui *endpoints* API dan arsitektur Inertia.js.
