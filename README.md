@@ -1,4 +1,4 @@
-# 🏢 Smart-Hub Management System
+#  Smart-Hub Management System
 
 > **Tugas UAS Pemrograman Fullstack — Universitas Dian Nusantara**
 
@@ -10,15 +10,15 @@
 
 ---
 
-## 📋 Deskripsi Proyek
+##  Deskripsi Proyek
 
 **Smart-Hub Management System** adalah platform terintegrasi untuk mengelola peminjaman ruang kerja dan inventaris peralatan studio secara mandiri. Sistem ini dirancang untuk melayani dua jenis pengguna: **Admin** (melalui Web Dashboard berbasis Inertia.js + Vue 3) dan **Member** (melalui fitur member panel & REST API untuk integrasi tablet).
 
 ---
 
-## ✨ Fitur Utama
+##  Fitur Utama
 
-### 🖥️ Web Application (Frontend — Inertia.js + Vue 3)
+###  Web Application (Frontend — Inertia.js + Vue 3)
 - **Autentikasi**: Login & Register dengan validasi role (Admin / Member)
 - **Admin Dashboard**: Statistik inventaris, booking, check-in, dan member secara real-time
 - **Manajemen Peralatan (CRUD)**: List, Create, Edit, Delete data peralatan studio
@@ -29,7 +29,7 @@
 - **Member Booking**: Membuat, melihat, dan membatalkan booking ruangan
 - **Profile Management**: Edit profil dan ubah password
 
-### 🔌 REST API (Backend — Laravel Sanctum)
+###  REST API (Backend — Laravel Sanctum)
 - **POST** `/api/login` — Autentikasi & mendapatkan Bearer Token
 - **POST** `/api/logout` — Logout & revoke token
 - **GET** `/api/equipments` — Daftar inventaris peralatan *(auth required)*
@@ -40,7 +40,7 @@
 - **POST** `/api/bookings` — Buat booking baru *(auth required)*
 - **POST** `/api/checkin` — Kirim data check-in peralatan *(auth required)*
 
-### 🎨 UI/UX Design
+###  UI/UX Design
 - Desain **Glassmorphism Premium** dengan palet warna Sky Blue
 - Tipografi modern menggunakan **Outfit** (Google Fonts)
 - Fully **Mobile Responsive** (Tablet & Handheld)
@@ -49,7 +49,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Kategori | Teknologi |
 |----------|-----------|
@@ -63,7 +63,7 @@
 
 ---
 
-## 🏗️ Arsitektur Git (Version Control Strategy)
+##  Arsitektur Git (Version Control Strategy)
 
 Proyek ini menggunakan strategi **multi-branch** untuk memisahkan pengembangan backend dan frontend agar tidak bersinggungan:
 
@@ -82,7 +82,7 @@ main
 
 ---
 
-## 🚀 Cara Instalasi & Menjalankan
+##  Cara Instalasi & Menjalankan
 
 ### Prasyarat
 - PHP >= 8.3
@@ -125,7 +125,7 @@ DB_USERNAME=postgres
 DB_PASSWORD=your_supabase_password
 ```
 
-> ⚠️ **Aktifkan Extension PHP PostgreSQL**: Buka `php.ini` dan pastikan baris berikut tidak dikomentari:
+>  **Aktifkan Extension PHP PostgreSQL**: Buka `php.ini` dan pastikan baris berikut tidak dikomentari:
 > ```
 > extension=pdo_pgsql
 > extension=pgsql
@@ -156,7 +156,7 @@ Buka browser: **http://127.0.0.1:8000**
 
 ---
 
-## 🔑 Akun Default (Setelah Seeder)
+##  Akun Default (Setelah Seeder)
 
 | Role | Email | Password |
 |------|-------|----------|
@@ -165,7 +165,7 @@ Buka browser: **http://127.0.0.1:8000**
 
 ---
 
-## 📁 Struktur Direktori Frontend (Vue Components)
+##  Struktur Direktori Frontend (Vue Components)
 
 ```
 resources/js/
@@ -196,7 +196,7 @@ resources/js/
 
 ---
 
-## 📄 Lisensi
+##  Lisensi
 
 Proyek ini dibuat untuk keperluan akademis.
 
