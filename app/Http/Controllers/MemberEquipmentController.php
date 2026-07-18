@@ -32,7 +32,11 @@ class MemberEquipmentController extends Controller
         $equipments = $query->paginate(12);
         $categories = Equipment::select('kategori')->distinct()->pluck('kategori');
 
-        return view('member.equipment.index', compact('equipments', 'categories'));
+        return \Inertia\Inertia::render('Member/Equipment/Index', [
+            'equipments' => $equipments,
+            'categories' => $categories,
+            'filters' => $request->only('search', 'status', 'kategori')
+        ]);
     }
 
     /**
@@ -102,6 +106,8 @@ class MemberEquipmentController extends Controller
             ->latest('waktu_checkin')
             ->paginate(10);
 
-        return view('member.equipment.history', compact('checkins'));
+        return \Inertia\Inertia::render('Member/Equipment/History', [
+            'checkins' => $checkins
+        ]);
     }
 }

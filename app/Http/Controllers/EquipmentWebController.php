@@ -22,7 +22,10 @@ class EquipmentWebController extends Controller
 
         $equipments = $query->paginate(10);
 
-        return view('admin.equipments.index', compact('equipments'));
+        return \Inertia\Inertia::render('Admin/Equipments/Index', [
+            'equipments' => $equipments,
+            'filters' => $request->only('search', 'status')
+        ]);
     }
 
     public function create()

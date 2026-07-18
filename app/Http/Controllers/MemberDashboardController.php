@@ -41,6 +41,11 @@ class MemberDashboardController extends Controller
                     ->whereRaw('waktu_checkin = (select max(waktu_checkin) from equipment_checkins where equipment_id = equipments.id)');
             })->get();
 
-        return view('member.dashboard', compact('stats', 'recent_bookings', 'recent_checkins', 'borrowed_equipments'));
+        return \Inertia\Inertia::render('Member/Dashboard', [
+            'stats' => $stats,
+            'recent_bookings' => $recent_bookings,
+            'recent_checkins' => $recent_checkins,
+            'borrowed_equipments' => $borrowed_equipments
+        ]);
     }
 }

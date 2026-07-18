@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RoomBooking;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookingWebController extends Controller
@@ -10,7 +11,10 @@ class BookingWebController extends Controller
     public function index()
     {
         $bookings = RoomBooking::with('user')->paginate(10);
-        return view('admin.bookings.index', compact('bookings'));
+        return \Inertia\Inertia::render('Admin/Bookings/Index', [
+            'bookings' => $bookings,
+            'users' => User::where('role', 'member')->get()
+        ]);
     }
 
     public function create()
