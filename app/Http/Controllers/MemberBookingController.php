@@ -17,7 +17,9 @@ class MemberBookingController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('member.booking.index', compact('bookings'));
+        return \Inertia\Inertia::render('Member/Booking/Index', [
+            'bookings' => $bookings
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class MemberBookingController extends Controller
      */
     public function create()
     {
-        return view('member.booking.create');
+        return \Inertia\Inertia::render('Member/Booking/Create');
     }
 
     /**

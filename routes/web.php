@@ -11,7 +11,7 @@ use App\Http\Controllers\MemberEquipmentController;
 use App\Http\Controllers\MemberBookingController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
