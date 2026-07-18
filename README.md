@@ -1,58 +1,209 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏢 Smart-Hub Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> **Tugas UAS Pemrograman Fullstack — Universitas Dian Nusantara**
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Inertia.js](https://img.shields.io/badge/Inertia.js-1.x-9553E9?style=for-the-badge&logo=inertia&logoColor=white)
+![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Git](https://img.shields.io/badge/Git-Version%20Control-F05032?style=for-the-badge&logo=git&logoColor=white)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Deskripsi Proyek
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Smart-Hub Management System** adalah platform terintegrasi untuk mengelola peminjaman ruang kerja dan inventaris peralatan studio secara mandiri. Sistem ini dirancang untuk melayani dua jenis pengguna: **Admin** (melalui Web Dashboard berbasis Inertia.js + Vue 3) dan **Member** (melalui fitur member panel & REST API untuk integrasi tablet).
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Fitur Utama
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🖥️ Web Application (Frontend — Inertia.js + Vue 3)
+- **Autentikasi**: Login & Register dengan validasi role (Admin / Member)
+- **Admin Dashboard**: Statistik inventaris, booking, check-in, dan member secara real-time
+- **Manajemen Peralatan (CRUD)**: List, Create, Edit, Delete data peralatan studio
+- **Manajemen Booking**: List, Create, Update status, validasi booking ruangan
+- **Log Check-in**: Monitoring aktivitas check-in/out peralatan oleh member
+- **Member Dashboard**: Tampilan statistik dan aktivitas pribadi member
+- **Member Equipment**: Browse peralatan, checkout & checkin alat
+- **Member Booking**: Membuat, melihat, dan membatalkan booking ruangan
+- **Profile Management**: Edit profil dan ubah password
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### 🔌 REST API (Backend — Laravel Sanctum)
+- **POST** `/api/login` — Autentikasi & mendapatkan Bearer Token
+- **POST** `/api/logout` — Logout & revoke token
+- **GET** `/api/equipments` — Daftar inventaris peralatan *(auth required)*
+- **POST** `/api/equipments` — Tambah peralatan *(auth required)*
+- **PUT** `/api/equipments/{id}` — Update peralatan *(auth required)*
+- **DELETE** `/api/equipments/{id}` — Hapus peralatan *(auth required)*
+- **GET** `/api/bookings` — Daftar booking ruangan *(auth required)*
+- **POST** `/api/bookings` — Buat booking baru *(auth required)*
+- **POST** `/api/checkin` — Kirim data check-in peralatan *(auth required)*
 
-## Agentic Development
+### 🎨 UI/UX Design
+- Desain **Glassmorphism Premium** dengan palet warna Sky Blue
+- Tipografi modern menggunakan **Outfit** (Google Fonts)
+- Fully **Mobile Responsive** (Tablet & Handheld)
+- Smooth micro-animations dan hover effects
+- Dark mode dengan gradient dinamis
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## 🛠️ Tech Stack
 
-php artisan boost:install
+| Kategori | Teknologi |
+|----------|-----------|
+| **Backend Framework** | Laravel 13 |
+| **Frontend Framework** | Inertia.js + Vue 3 |
+| **Build Tool** | Vite 8 |
+| **Database Cloud** | Supabase (PostgreSQL) |
+| **API Security** | Laravel Sanctum (Token-based) |
+| **Version Control** | Git (Multi-branch Strategy) |
+| **Styling** | Vanilla CSS (Custom Design System) |
+
+---
+
+## 🏗️ Arsitektur Git (Version Control Strategy)
+
+Proyek ini menggunakan strategi **multi-branch** untuk memisahkan pengembangan backend dan frontend agar tidak bersinggungan:
+
+```
+main
+├── development          ← Backend API & Middleware
+│   └── feature/...     ← Feature branches
+└── frontend-inertia     ← Web App Frontend (Inertia.js + Vue 3)
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+| Branch | Fungsi |
+|--------|--------|
+| `main` | Production-ready code |
+| `development` | Backend API services (Laravel Sanctum) |
+| `frontend-inertia` | Frontend Web App (Inertia.js + Vue 3 + Supabase) |
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🚀 Cara Instalasi & Menjalankan
 
-## Code of Conduct
+### Prasyarat
+- PHP >= 8.3
+- Composer
+- Node.js >= 18
+- Akun Supabase (untuk database cloud)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Langkah Instalasi
 
-## Security Vulnerabilities
+**1. Clone Repositori & Pindah ke Branch Frontend**
+```bash
+git clone https://github.com/keeyy451/smarthub.git
+cd smarthub
+git checkout frontend-inertia
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**2. Instal PHP Dependencies**
+```bash
+composer install
+```
 
-## License
+**3. Instal Node.js Dependencies**
+```bash
+npm install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**4. Konfigurasi Environment**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+**5. Update Konfigurasi Database Supabase di `.env`**
+```env
+DB_CONNECTION=pgsql
+DB_HOST=db.xritvfuylovukvyfzikl.supabase.co
+DB_PORT=5432
+DB_DATABASE=postgres
+DB_USERNAME=postgres
+DB_PASSWORD=your_supabase_password
+```
+
+> ⚠️ **Aktifkan Extension PHP PostgreSQL**: Buka `php.ini` dan pastikan baris berikut tidak dikomentari:
+> ```
+> extension=pdo_pgsql
+> extension=pgsql
+> ```
+
+**6. Jalankan Migrasi Database ke Supabase**
+```bash
+php artisan migrate --force
+```
+
+**7. Jalankan Seeder (Data Awal)**
+```bash
+php artisan db:seed --force
+```
+
+**8. Jalankan Aplikasi**
+
+Buka dua terminal secara bersamaan:
+```bash
+# Terminal 1 — PHP Server
+php artisan serve
+
+# Terminal 2 — Vite Development Server
+npm run dev
+```
+
+Buka browser: **http://127.0.0.1:8000**
+
+---
+
+## 🔑 Akun Default (Setelah Seeder)
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Admin** | `admin@gmail.com` | `password` |
+| **Member** | `member@gmail.com` | `password` |
+
+---
+
+## 📁 Struktur Direktori Frontend (Vue Components)
+
+```
+resources/js/
+├── app.js                    ← Entry point Inertia.js
+├── Components/
+│   ├── InputField.vue        ← Reusable input component
+│   ├── Alert.vue             ← Flash message component
+│   └── Modal.vue             ← Modal dialog component
+├── Layouts/
+│   ├── AuthenticatedLayout.vue  ← Layout untuk halaman terautentikasi
+│   └── GuestLayout.vue          ← Layout untuk halaman tamu (login/register)
+└── Pages/
+    ├── Auth/
+    │   ├── Login.vue
+    │   └── Register.vue
+    ├── Admin/
+    │   ├── Dashboard.vue
+    │   ├── Equipments/Index.vue
+    │   ├── Bookings/Index.vue
+    │   └── Checkins/Index.vue
+    ├── Member/
+    │   ├── Dashboard.vue
+    │   ├── Equipment/Index.vue
+    │   └── Booking/Index.vue
+    └── Profile/
+        └── Edit.vue
+```
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dibuat untuk keperluan akademis.
+
+---
+
+**Dibuat Oleh**: Ezra Firmansyah  
+**NIM**: 411231135  
+**Mata Kuliah**: Pemrograman Fullstack  
+**Universitas**: Universitas Dian Nusantara  
+**Semester**: UAS 2026
